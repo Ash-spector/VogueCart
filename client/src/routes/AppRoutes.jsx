@@ -6,6 +6,18 @@ import Shop from '../pages/Shop';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ProductDetails from '../pages/ProductDetails';
+import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
+import Orders from '../pages/Orders';
+import OrderDetails from '../pages/OrderDetails';
+import AdminLayout from '../admin/AdminLayout';
+import Dashboard from '../admin/Dashboard';
+import Profile from '../pages/Profile';
+import Products from '../admin/Products';
+import AddProduct from '../admin/AddProduct';
+import EditProduct from '../admin/EditProduct';
+import AdminOrders from '../admin/Orders';
+import Users from '../admin/Users';
 
 // Temporary page for routes we haven't built yet, so no link is ever broken
 const ComingSoon = ({ title }) => (
@@ -19,31 +31,35 @@ const ComingSoon = ({ title }) => (
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Store pages: Navbar + Footer */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/cart" element={<ComingSoon title="Cart" />} />
+        <Route path="/cart" element={<Cart />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/checkout" element={<ComingSoon title="Checkout" />} />
-          <Route path="/orders" element={<ComingSoon title="My Orders" />} />
-          <Route path="/orders/:id" element={<ComingSoon title="Order Details" />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<OrderDetails />} />
           <Route path="/profile" element={<ComingSoon title="My Profile" />} />
         </Route>
 
-        <Route element={<ProtectedRoute adminOnly />}>
-          <Route path="/admin" element={<ComingSoon title="Admin Dashboard" />} />
-          <Route path="/admin/products" element={<ComingSoon title="Product Management" />} />
-          <Route path="/admin/products/new" element={<ComingSoon title="Add Product" />} />
-          <Route path="/admin/products/edit/:id" element={<ComingSoon title="Edit Product" />} />
-          <Route path="/admin/orders" element={<ComingSoon title="Order Management" />} />
-          <Route path="/admin/users" element={<ComingSoon title="User Management" />} />
-        </Route>
-
         <Route path="*" element={<ComingSoon title="Page not found" />} />
+      </Route>
+
+      {/* Admin pages: own sidebar layout, admin only */}
+      <Route element={<ProtectedRoute adminOnly />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/products" element={<Products />} />
+          <Route path="/admin/products/new" element={<AddProduct />} />
+          <Route path="/admin/products/edit/:id" element={<EditProduct />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/users" element={<Users />} />
+        </Route>
       </Route>
     </Routes>
   );

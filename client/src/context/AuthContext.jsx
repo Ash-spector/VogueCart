@@ -29,6 +29,12 @@ export function AuthProvider({ children }) {
     localStorage.removeItem(USER_KEY);
     setUser(null);
   }, []);
+  
+  const updateUser = (profile) => {
+  const next = { _id: profile._id, name: profile.name, email: profile.email, role: profile.role };
+  localStorage.setItem(USER_KEY, JSON.stringify(next));
+  setUser(next);
+};
 
   // Verify the stored token when the app loads
   useEffect(() => {
