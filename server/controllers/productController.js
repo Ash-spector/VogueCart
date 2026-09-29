@@ -49,6 +49,7 @@ export const getProducts = async (req, res) => {
     filter.$or = [{ name: rx }, { brand: rx }, { category: rx }];
   }
   if (category && category !== 'all') filter.category = category.toLowerCase();
+  if (req.query.sale === 'true') filter.discountPrice = { $gt: 0 };
 
   // multi-value filters: ?brand=Nike,Zara  ?size=M,L  ?color=Black,Blue
   const list = (v) => String(v).split(',').map((x) => x.trim()).filter(Boolean);

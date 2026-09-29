@@ -2,6 +2,9 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Home from '../pages/Home';
+import Shop from '../pages/Shop';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
 
 // Temporary page for routes we haven't built yet, so no link is ever broken
 const ComingSoon = ({ title }) => (
@@ -17,10 +20,10 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<ComingSoon title="Shop" />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ComingSoon title="Product Details" />} />
-        <Route path="/login" element={<ComingSoon title="Login" />} />
-        <Route path="/register" element={<ComingSoon title="Register" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<ComingSoon title="Cart" />} />
 
         <Route element={<ProtectedRoute />}>
