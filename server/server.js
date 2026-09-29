@@ -9,6 +9,8 @@ import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
@@ -25,11 +27,22 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
+app.use(helmet());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use(notFound);
 app.use(errorHandler);
+app.use(
+  '/api/auth',
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 50,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: 'Too many attempts. Please try again in a few minutes.' },
+  })
+);
 
 const PORT = process.env.PORT || 5000;
 

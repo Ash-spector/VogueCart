@@ -18,6 +18,7 @@ import AddProduct from '../admin/AddProduct';
 import EditProduct from '../admin/EditProduct';
 import AdminOrders from '../admin/Orders';
 import Users from '../admin/Users';
+import NotFound from '../pages/NotFound';
 
 // Temporary page for routes we haven't built yet, so no link is ever broken
 const ComingSoon = ({ title }) => (
@@ -39,6 +40,7 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/404" element={<NotFound />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/checkout" element={<Checkout />} />
@@ -47,7 +49,7 @@ export default function AppRoutes() {
           <Route path="/profile" element={<ComingSoon title="My Profile" />} />
         </Route>
 
-        <Route path="*" element={<ComingSoon title="Page not found" />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
 
       {/* Admin pages: own sidebar layout, admin only */}

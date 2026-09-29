@@ -12,6 +12,7 @@ const CATEGORIES = [
   { label: 'Accessories', value: 'accessories' },
 ];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const SHOE_SIZES = ['6', '7', '8', '9', '10', '11'];
 const COLORS = [
   { name: 'Black', hex: '#111111' },
   { name: 'White', hex: '#ffffff' },
@@ -42,7 +43,8 @@ export default function Shop() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const category = params.get('category') || '';
-  const search = params.get('search') || '';
+const sizeOptions = category === 'shoes' ? SHOE_SIZES : SIZES;
+const search = params.get('search') || '';
   const sort = params.get('sort') || 'newest';
   const sale = params.get('sale') === 'true';
   const page = parseInt(params.get('page')) || 1;
@@ -134,7 +136,7 @@ export default function Shop() {
 
       <Block title="Size">
         <div className="flex flex-wrap gap-2">
-          {SIZES.map((s) => (
+          {sizeOptions.map((s) => (
             <button
               key={s}
               onClick={() => setParam({ size: toggle(sizes, s) })}
