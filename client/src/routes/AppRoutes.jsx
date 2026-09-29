@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Shop from '../pages/Shop';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import ProductDetails from '../pages/ProductDetails';
 
 // Temporary page for routes we haven't built yet, so no link is ever broken
 const ComingSoon = ({ title }) => (
@@ -21,7 +22,7 @@ export default function AppRoutes() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:id" element={<ComingSoon title="Product Details" />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<ComingSoon title="Cart" />} />

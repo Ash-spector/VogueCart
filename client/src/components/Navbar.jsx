@@ -58,7 +58,7 @@ export default function Navbar() {
     `text-sm transition-colors duration-200 ${sale ? 'text-red-600 hover:text-red-700' : 'text-neutral-600 hover:text-black'}`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white">
       <div className="page-container flex h-16 items-center justify-between">
         {/* Left: hamburger + logo */}
         <div className="flex items-center gap-3">
