@@ -6,7 +6,7 @@ import Product from './models/Product.js';
 import Order from './models/Order.js';
 import Cart from './models/Cart.js';
 
-dotenv.config();
+dotenv.config({ path: process.env.ENV_FILE || '.env' });
 
 // Unsplash image helper
 const img = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
@@ -83,17 +83,20 @@ const importData = async () => {
     await Product.deleteMany();
     await User.deleteMany({ email: 'admin@voguecart.com' });
 
+    // In production, set ADMIN_PASSWORD before running the seed
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+
     await User.create({
       name: 'VogueCart Admin',
       email: 'admin@voguecart.com',
-      password: 'admin123',
+      password: adminPassword,
       role: 'admin',
     });
 
     await Product.insertMany(products);
 
     console.log(`Seeded ${products.length} products and the admin user`);
-    console.log('Admin login -> admin@voguecart.com / admin123');
+    console.log('Admin created: admin@voguecart.com');
     process.exit(0);
   } catch (err) {
     console.error(`Seed failed: ${err.message}`);
