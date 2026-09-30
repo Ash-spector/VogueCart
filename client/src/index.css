@@ -2,10 +2,18 @@
 
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
   --color-brand: #111111;
   --color-sidebar: #111827;
   --color-star: #f59e0b;
   --color-sale: #16a34a;
+  --color-cream: #faf7f2;
+
+  --animate-fade-up: fade-up 0.7s ease-out both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
 html {
@@ -16,14 +24,44 @@ body {
   @apply bg-white text-neutral-900 antialiased;
 }
 
+::selection {
+  background: #111;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
 @layer components {
   .page-container {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md bg-brand px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-neutral-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-colors duration-200 hover:border-neutral-900;
+    @apply inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-all duration-200 hover:border-neutral-900 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .section-title {
+    @apply font-display text-2xl font-semibold tracking-tight sm:text-3xl;
+  }
+  .shimmer {
+    background: linear-gradient(90deg, #eeeeee 25%, #f7f7f7 50%, #eeeeee 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
